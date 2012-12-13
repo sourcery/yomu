@@ -76,6 +76,18 @@ describe Yomu do
       refute yomu.stream?
     end
 
+    it 'accepts a https URI' do
+      yomu = nil
+
+      assert_silent do
+        yomu = Yomu.new 'https://www.google.com'
+      end
+
+      assert yomu.uri?
+      refute yomu.path?
+      refute yomu.stream?
+    end
+
     it 'accepts a stream or object that can be read' do
       yomu = nil
 

@@ -1,6 +1,8 @@
 require 'yomu/version'
 
 require 'net/http'
+require 'net/https'
+require 'uri'
 require 'yaml'
 
 class Yomu
@@ -121,7 +123,12 @@ class Yomu
     if path?
       @data = File.read @path
     elsif uri?
-      @data = Net::HTTP.get @uri
+      uri_parsed = URI @uri
+      if uri_parsed.scheme == "http"
+        @data = Net::HTTP.get @uri
+      else
+        @data = Net::HTTPS.get @uri
+      end
     elsif stream?
       @data = @stream.read
     end
