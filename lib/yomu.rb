@@ -129,10 +129,9 @@ class Yomu
       else
         http = Net::HTTP.new(uri_parsed.host, uri_parsed.port)
         http.use_ssl = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        http.verify_mode = OpenSSL::SSL::VERIFY_PEER
         request = Net::HTTP::Get.new(uri_parsed.request_uri)
-        @data = http.request(request)
-        
+        @data = http.request(request)             
       end
     elsif stream?
       @data = @stream.read
