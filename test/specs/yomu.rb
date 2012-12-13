@@ -81,11 +81,20 @@ describe Yomu do
 
       assert_silent do
         yomu = Yomu.new 'https://www.google.com'
-      end
-
+      end      
       assert yomu.uri?
       refute yomu.path?
       refute yomu.stream?
+    end
+    
+    it 'data handles https uri' do
+      yomu = nil
+
+      assert_silent do
+        yomu = Yomu.new 'https://www.google.com'
+        data = yomu.data
+        assert_equal data.code, "200"
+      end 
     end
 
     it 'accepts a stream or object that can be read' do
