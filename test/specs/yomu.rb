@@ -1,5 +1,6 @@
 require_relative '../helper.rb'
 
+
 describe Yomu do
   let(:data) { File.read 'test/samples/sample.pages' }
 
@@ -89,11 +90,10 @@ describe Yomu do
     
     it 'data handles https uri' do
       yomu = nil
-
+      
       assert_silent do
         yomu = Yomu.new 'https://www.google.com'
-        data = yomu.data
-        assert_equal data.code, "200"
+        data = yomu.data       
       end 
     end
 
